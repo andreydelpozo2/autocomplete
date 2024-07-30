@@ -184,8 +184,8 @@ export const dependenciesGenerator: Fig.Generator = {
           description: dependencies[pkgName]
             ? "dependency"
             : optionalDependencies[pkgName]
-            ? "optionalDependency"
-            : "devDependency",
+              ? "optionalDependency"
+              : "devDependency",
         }));
     } else {
       const { stdout } = await executeShellCommand({
@@ -362,6 +362,12 @@ const registryOption: Fig.Option = {
   args: { name: "registry" },
 };
 
+const verboseOption: Fig.Option = {
+  name: "--verbose",
+  description: "Show extra information",
+  args: { name: "verbose" },
+};
+
 const otpOption: Fig.Option = {
   name: "--otp",
   description: "One-time password from a two-factor authenticator",
@@ -457,6 +463,8 @@ const completionSpec: Fig.Spec = {
           name: "--no-package-lock",
           description: "Ignores package-lock.json files when installing",
         },
+        registryOption,
+        verboseOption,
         omitOption,
         ignoreScriptsOption,
         {
@@ -670,6 +678,8 @@ const completionSpec: Fig.Spec = {
         },
         ignoreScriptsOption,
         scriptShellOption,
+        verboseOption,
+        registryOption,
       ],
     },
     {
@@ -1536,6 +1546,11 @@ const completionSpec: Fig.Spec = {
           name: "--no-fund",
           description:
             "Hides the message at the end of each npm install acknowledging the number of dependencies looking for funding",
+        },
+        {
+          name: "--save",
+          description:
+            "Update the semver values of direct dependencies in your project package.json",
         },
         dryRunOption,
         ...workSpaceOptions,

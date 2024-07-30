@@ -7,11 +7,11 @@ const processXcodeList = (out: string, tokens: string[]) =>
       icon: line.includes("Selected")
         ? "⭐️"
         : line.includes("Installed")
-        ? "🔨"
-        : tokens.includes("select") || tokens.includes("uninstall")
-        ? "🔨"
-        : "⬇️",
-      description: line.slice(line.indexOf("(")).replaceAll(/[\(\)]/g, ""),
+          ? "🔨"
+          : tokens.includes("select") || tokens.includes("uninstall")
+            ? "🔨"
+            : "⬇️",
+      description: line.slice(line.indexOf("(")).replace(/[\(\)]/g, ""),
     }));
 
 const allXcodes: Fig.Generator = {
